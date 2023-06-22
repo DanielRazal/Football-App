@@ -8,12 +8,20 @@ const Leagues = () => {
   useEffect(() => {
     axios("http://api-football-standings.azharimm.dev/leagues")
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data.data);
+        setData(res.data.data);
       })
   }, []);
 
   return (
-    <div className='leagues-container'>Leagues</div>
+    <div className='leagues-container'>
+      {data.map((data) => (
+        <div key={data.id} className="league-div">
+          <img src={data.logos.light} alt="#"/>
+          <h1>{data.name}</h1>
+        </div>
+      ))}
+    </div>
   );
 };
 

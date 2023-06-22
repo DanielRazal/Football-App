@@ -1,10 +1,10 @@
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-.navbar{
+.navbar {
   width: 100%;
   height: 10vh;
   background-color: #000000;
@@ -15,7 +15,7 @@
   text-align: center;
 }
 
-.content-container{
+.content-container {
   width: 100%;
   min-height: 80vh;
   display: flex;
@@ -23,7 +23,7 @@
   flex-direction: column;
 }
 
-.tabs{
+.tabs {
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -32,7 +32,7 @@
   margin: 50px 0;
 }
 
-.tab-leagues{
+.tab-leagues {
   width: 300px;
   display: flex;
   align-items: center;
@@ -43,7 +43,7 @@
   border-right: 5px solid #cccc;
 }
 
-.tab-standings{
+.tab-standings {
   width: 300px;
   display: flex;
   align-items: center;
@@ -53,7 +53,7 @@
   height: 50px;
 }
 
-.footer{
+.footer {
   width: 100%;
   height: 10vh;
   background-color: #000000;
@@ -62,4 +62,40 @@
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+.leagues-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  text-align: center;
+}
+
+.league-div>img {
+  width: 250px;
+}
+
+.league-div {
+  margin: 20px 0;
+}
+
+.league-div:hover {
+  transform: scale(1.1);
+}
+
+select {
+  padding: 10px;
+  font-size: 19px;
+}
+
+.standing-results {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.standing-info-div {
+  margin: 20px 0;
 }
