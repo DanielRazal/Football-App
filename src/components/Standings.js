@@ -1,69 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import '../App.css'
-import axios from 'axios';
-import { Rings } from 'react-loader-spinner'
+import React, { useEffect, useState } from 'react';
+import '../App.css';
+import { Rings } from 'react-loader-spinner';
+import { getStandings, getLeagues } from '../Services/FootballService';
 
 const Standings = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedLeague, setSelectedLeague] = useState("eng.1");
-  const [selectedYear, setSelectedYear] = useState("2021");
+  const [selectedYear, setSelectedYear] = useState("2022");
+  const [leagueOptions, setLeagueOptions] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    axios(`http://api-football-standings.azharimm.dev/leagues/${selectedLeague}/standings?season=${selectedYear}`)
-      .then(res => {
-        console.log(res.data.data.standings);
-        setData(res.data.data.standings);
-      }).catch(err => console.log(err))
+    getStandings(selectedLeague, selectedYear)
+      .then((standings) => {
+        console.log(standings);
+        setData(standings);
+      })
+      .catch((error) => console.log(error))
       .finally(() => setLoading(false));
-  }, [selectedYear, selectedLeague])
+  }, [selectedYear, selectedLeague]);
 
+  useEffect(() => {
+    getLeagues()
+      .then((leagues) => {
+        console.log(leagues);
+        setLeagueOptions(leagues);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   return (
-    <div className='standings-container'>
-      <div className="select-container">
-        <select name="select-league" id="select-league" defaultValue={selectedLeague}
-          onChange={(e) => setSelectedLeague(e.target.value)}>
-          <option value="arg.1">Argentine Liga Profesional de Fútbol</option>
-          <option value="aus.1">Australian A-League</option>
-          <option value="bra.1">Brazilian Serie A</option>
-          <option value="chn.1">Chinese Super League</option>
-          <option value="ned.1">Dutch Eredivisie</option>
-          <option value="eng.1">English Premier League</option>
-          <option value="fra.1">French Ligue 1</option>
-          <option value="ger.1">German Bundesliga</option>
-          <option value="idn.1">Indonesian Liga 1</option>
-          <option value="ita.1">Italian Serie A</option>
-          <option value="jpn.1">Japanese J League</option>
-          <option value="mys1">Malaysian Super League</option>
-          <option value="mex.1">Mexican Liga BBVA MX</option>
-          <option value="por.1">Portuguese Liga</option>
-          <option value="rus.1">Russian Premier League</option>
-          <option value="sgp.1">Singaporean Premier League</option>
-          <option value="esp.1">Spanish Primera División</option>
-          <option value="tha.1">Thai Premier League</option>
-          <option value="tur.1">Turkish Super Lig</option>
-          <option value="uga.1">Ugandan Super League</option>
-        </select>
-        <select name="select-year" id="select-year" onChange={(e) => setSelectedYear(e.target.value)}
-          defaultValue={selectedYear}>
-          <option value="2011">2011</option>
-          <option value="2012">2012</option>
-          <option value="2013">2013</option>
-          <option value="2014">2014</option>
-          <option value="2015">2015</option>
-          <option value="2016">2016</option>
-          <option value="2017">2017</option>
-          <option value="2018">2018</option>
-          <option value="2019">2019</option>
-          <option value="2020">2020</option>
-          <option value="2021">2021</option>
-        </select>
-      </div>
-
-      <div className="standing-results">
-        {loading ? <Rings
+    <div className="flex items-center flex-col text-center">
+      {loading ? (
+        <Rings
           height="120"
           width="120"
           color="#00BFFF"
@@ -72,24 +44,111 @@ const Standings = () => {
           wrapperClass=""
           visible={true}
           ariaLabel="rings-loading"
-        /> : (
+        />
+      ) : (
+        <div>
+          <div className="p-3 text-white bg-purple-950">
+            <h1 className="text-2xl font-bold text-left">Premier League Table</h1>
+          </div>
+          <div className="bg-gray-100 p-2 text-center">
+            <div className="flex justify-center items-center space-x-4">
+              <select
+                name="select-year"
+                id="select-year"
+                onChange={(e) => setSelectedYear(e.target.value)}
+                defaultValue={selectedYear}
+                className="mt-2 bg-transparent border-none"
+              >
+                {Array.from({ length: 13 }, (_, index) => {
+                  const year = 2022 - index;
+                  return (
+                    <option key={year} value={year}>
+                      {year}-{year + 1}
+                    </option>
+                  );
+                })}
+              </select>
 
-          data.map((data, index) => (
-            <div key={data.team.id} className="standing-info-div">
-              <h1>
-                <span>
-                  {`${index + 1}.`}
-                  <img src={data.team.logos[0].href} alt="#" style={{ width: "30px" }} />
-                </span>
-                {data.team.shortDisplayName}
-              </h1>
+              <select
+                name="select-league"
+                id="select-league"
+                defaultValue={selectedLeague}
+                onChange={(e) => setSelectedLeague(e.target.value)}
+                className="mt-2 bg-transparent border-none"
+              >
+                {leagueOptions.map((league) => (
+                  <option key={league.id} value={league.id}>
+                    {league.name}
+                  </option>
+                ))}
+              </select>
             </div>
-          ))
-        )}
+          </div>
 
-      </div>
+          <div>
+            <div class="relative overflow-x-auto">
+              <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                    <th className="px-6 py-3 pr-2"><span class="text-sm">Team</span></th>
+                    <th class="px-6 py-3">GP</th>
+                    <th class="px-6 py-3">W</th>
+                    <th class="px-6 py-3">D</th>
+                    <th class="px-6 py-3">L</th>
+                    <th class="px-6 py-3">PF</th>
+                    <th class="px-6 py-3">PA</th>
+                    <th class="px-6 py-3">GD</th>
+                    <th class="px-6 py-3">P</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data.map((data) => (
+                    <tr key={data.team.id} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                      <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center">
+                        <span className="mr-2">
+                          {data.stats.find(stat => stat.name === 'rank').displayValue}
+                        </span>
+                        <span className="pl-team-logo">
+                          <img src={data.team.logos[0].href} alt="#" />
+                        </span>
+                        <span className="ml-2">
+                          {data.team.shortDisplayName}
+                        </span>
+                      </th>
+                      <td class="px-6 py-4">
+                        {data.stats.find(stat => stat.name === 'gamesPlayed').displayValue}
+                      </td>
+                      <td class="px-6 py-4">
+                        {data.stats.find(stat => stat.name === 'wins').displayValue}
+                      </td>
+                      <td class="px-6 py-4">
+                        {data.stats.find(stat => stat.name === 'ties').displayValue}
+                      </td>
+                      <td class="px-6 py-4">
+                        {data.stats.find(stat => stat.name === 'losses').displayValue}
+                      </td>
+                      <td class="px-6 py-4">
+                        {data.stats.find(stat => stat.name === 'pointsFor').displayValue}
+                      </td>
+                      <td class="px-6 py-4">
+                        {data.stats.find(stat => stat.name === 'pointsAgainst').displayValue}
+                      </td>
+                      <td class="px-6 py-4">
+                        {data.stats.find(stat => stat.name === 'pointDifferential').displayValue}
+                      </td>
+                      <td class="px-6 py-4">
+                        {data.stats.find(stat => stat.name === 'points').displayValue}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Standings
+export default Standings;

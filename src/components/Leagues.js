@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
-import axios from "axios";
+import { getLeagues } from '../Services/FootballService';
 
 const Leagues = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios("http://api-football-standings.azharimm.dev/leagues")
-      .then((res) => {
-        console.log(res.data.data);
-        setData(res.data.data);
+    getLeagues()
+      .then((data) => {
+        console.log(data);
+        setData(data);
       })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
 
+
   return (
-    <div className='leagues-container'>
+    <div className="w-full grid grid-cols-4 justify-items-center text-center">
       {data.map((data) => (
-        <div key={data.id} className="league-div">
-          <img src={data.logos.light} alt="#"/>
-          <h1>{data.name}</h1>
+        <div key={data.id} className="mt-20 mb-20 hover:scale-110 cursor-pointer">
+          <img src={data.logos.light} alt="#" className="w-60" />
+          <h1 className="font-bold text-lg">{data.name}</h1>
         </div>
       ))}
     </div>

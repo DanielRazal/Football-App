@@ -9,13 +9,13 @@ const Content = () => {
     const [active, setActive] = useState(true);
 
     return (
-        <div className='content-container'>
-            <div className='tabs'>
+        <div className="w-full min-h-screen flex items-center flex-col">
+            <div className="flex flex-row w-full items-center justify-center my-8">
                 <div className='tab-leagues' onClick={() => setActive(true)}>
-                    <h2 style={{color: active ? "#c20114": null}}>Leagues</h2>
+                    <h2 style={{ color: active ? "#c20114" : null }}>Leagues</h2>
                 </div>
                 <div className='tab-standings' onClick={() => setActive(false)}>
-                    <h2 style={{color: !active ? "#c20114": null}}>Standings</h2>
+                    <h2 style={{ color: !active ? "#c20114" : null }}>Standings</h2>
                 </div>
             </div>
             {active ? <Leagues /> : <Standings />}
