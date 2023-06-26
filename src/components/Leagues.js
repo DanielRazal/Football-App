@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
-import { getLeagues } from '../Services/FootballService';
+import FootballService from '../Services/FootballService';
 
 const Leagues = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    getLeagues()
+    FootballService.getLeagues()
       .then((data) => {
         console.log(data);
         setData(data);

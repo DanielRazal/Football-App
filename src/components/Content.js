@@ -11,10 +11,13 @@ const Content = () => {
     return (
         <div className="w-full min-h-screen flex items-center flex-col">
             <div className="flex flex-row w-full items-center justify-center my-8">
-                <div className='tab-leagues' onClick={() => setActive(true)}>
+                <div className="w-60 h-12 flex items-center justify-center bg-black text-white h-50
+                 border border-r-4 border-gray-500 cursor-pointer"
+                    onClick={() => setActive(true)}>
                     <h2 style={{ color: active ? "#c20114" : null }}>Leagues</h2>
                 </div>
-                <div className='tab-standings' onClick={() => setActive(false)}>
+                <div className="w-60 h-12 flex items-center justify-center bg-black
+                 text-white h-50 cursor-pointer" onClick={() => setActive(false)}>
                     <h2 style={{ color: !active ? "#c20114" : null }}>Standings</h2>
                 </div>
             </div>
@@ -23,4 +26,4 @@ const Content = () => {
     )
 }
 
-export default Content
+export default Content;

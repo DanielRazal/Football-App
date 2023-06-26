@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
-import { Rings } from 'react-loader-spinner';
-import { getStandings, getLeagues } from '../Services/FootballService';
+import { Oval } from 'react-loader-spinner';
+import FootballService from '../Services/FootballService';
 
 const Standings = () => {
   const [data, setData] = useState([]);
@@ -9,12 +9,13 @@ const Standings = () => {
   const [selectedLeague, setSelectedLeague] = useState("eng.1");
   const [selectedYear, setSelectedYear] = useState("2022");
   const [leagueOptions, setLeagueOptions] = useState([]);
+  const [league, setLeague] = useState([]);
 
   useEffect(() => {
     setLoading(true);
-    getStandings(selectedLeague, selectedYear)
+    FootballService.getStandings(selectedLeague, selectedYear)
       .then((standings) => {
-        console.log(standings);
+        // console.log(standings);
         setData(standings);
       })
       .catch((error) => console.log(error))
@@ -22,33 +23,51 @@ const Standings = () => {
   }, [selectedYear, selectedLeague]);
 
   useEffect(() => {
-    getLeagues()
+    FootballService.getLeagues()
       .then((leagues) => {
-        console.log(leagues);
+        // console.log(leagues);
         setLeagueOptions(leagues);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+
+    FootballService.getLeagueById(selectedLeague)
+      .then((league) => {
+        console.log(league);
+        setLeague(league);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [selectedLeague]);
+
 
   return (
     <div className="flex items-center flex-col text-center">
       {loading ? (
-        <Rings
-          height="120"
-          width="120"
-          color="#00BFFF"
-          radius="6"
+        <Oval
+          height={50}
+          width={50}
+          color="#cccc"
           wrapperStyle={{}}
           wrapperClass=""
           visible={true}
-          ariaLabel="rings-loading"
+          ariaLabel='oval-loading'
+          secondaryColor="#6c63ff"
+          strokeWidth={2}
+          strokeWidthSecondary={2}
+
         />
       ) : (
         <div>
-          <div className="p-3 text-white bg-purple-950">
-            <h1 className="text-2xl font-bold text-left">Premier League Table</h1>
+          <div className="p-3 text-white bg-gray-100 flex items-center">
+            {league && league.logos && (
+              <img src={league.logos.light} alt="#" className="w-6 mr-2" />
+            )}
+            <h1 className="text-2xl font-bold text-left text-black">
+              {league ? league.name : "Loading..."} Table
+            </h1>
           </div>
           <div className="bg-gray-100 p-2 text-center">
             <div className="flex justify-center items-center space-x-4">
@@ -102,17 +121,19 @@ const Standings = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((data) => (
+                  {data && data.map((data) => (
                     <tr key={data.team.id} class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                       <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white flex items-center">
                         <span className="mr-2">
                           {data.stats.find(stat => stat.name === 'rank').displayValue}
                         </span>
-                        <span className="pl-team-logo">
-                          <img src={data.team.logos[0].href} alt="#" />
-                        </span>
+                        {data.team && data.team.logos && (
+                          <span className="w-8 h-8 object-cover rounded-full">
+                            <img src={data.team.logos[0].href} alt="#" />
+                          </span>
+                        )}
                         <span className="ml-2">
-                          {data.team.shortDisplayName}
+                          {data.team && data.team.shortDisplayName}
                         </span>
                       </th>
                       <td class="px-6 py-4">
