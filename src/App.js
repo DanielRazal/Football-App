@@ -1,6 +1,4 @@
 import './App.css';
-import Footer from './Components/Footer';
-import Navbar from './Components/Navbar';
 import { BrowserRouter as Router, Route ,Routes} from 'react-router-dom';
 import NotFoundPage from './Components/NotFoundPage';
 import Standings from './Components/Standings';
@@ -10,7 +8,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
         <Routes>
           <Route path="/" element={<Leagues />} />
           {/* <Route path="/leagues" element={<Content />} /> */}
@@ -19,7 +16,6 @@ function App() {
           <Route path="/standings" element={<Standings />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        <Footer />
       </div>
     </Router>
   );

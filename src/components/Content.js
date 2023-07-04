@@ -10,7 +10,7 @@ const Content = () => {
             <div className="flex flex-row w-full items-center justify-center my-8">
                 <Link
                     to="/leagues"
-                    className={`w-60 h-12 flex items-center justify-center bg-black text-white h-50 border border-r-4 border-gray-500 cursor-pointer ${active ? 'active' : ''
+                    className={`w-60 h-12 flex items-center justify-center bg-black text-white h-50 border border-r-4 border-gray-500 cursor-pointer ${active ? 'active-link' : ''
                         }`}
                     onClick={() => setActive(true)}
                 >
@@ -18,7 +18,7 @@ const Content = () => {
                 </Link>
                 <Link
                     to="/standings"
-                    className={`w-60 h-12 flex items-center justify-center bg-black text-white h-50 cursor-pointer ${!active ? 'active' : ''
+                    className={`w-60 h-12 flex items-center justify-center bg-black text-white h-50 cursor-pointer ${!active ? 'active-link' : ''
                         }`}
                     onClick={() => setActive(false)}
                 >

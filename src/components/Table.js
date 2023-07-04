@@ -80,12 +80,14 @@ const Table = ({ data }) => {
                     </tbody>
                 </table>
             </div>
+            <br/>
 
             {!showAll && data.length > 5 && (
                 <button className="mt-4 text-blue-500 hover:text-blue-700" onClick={handleLoadMore}>
-                    <FontAwesomeIcon icon={faSync} spin /> Load More
+                    <FontAwesomeIcon icon={faSync} spin />
                 </button>
             )}
+            <br/><br/>
         </div>
     );
 };

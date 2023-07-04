@@ -7,6 +7,17 @@ const Selects = ({
   setSelectedLeague,
   leagueOptions
 }) => {
+
+  const topFiveIndexes = [5, 9, 16, 7, 6, 13, 4, 18, 12];
+
+  const topFiveLeagues = topFiveIndexes.map((index) => leagueOptions[index]);
+
+  const remainingLeagues = leagueOptions.filter(
+    (_, index) => !topFiveIndexes.includes(index)
+  );
+
+  const updatedLeagueOptions = [...topFiveLeagues, ...remainingLeagues];
+
   return (
     <div className="flex justify-center items-center space-x-4">
       <select
@@ -33,9 +44,9 @@ const Selects = ({
         onChange={(e) => setSelectedLeague(e.target.value)}
         className="mt-2 bg-transparent border-none"
       >
-        {leagueOptions.map((league) => (
-          <option key={league.id} value={league.id}>
-            {league.name}
+        {updatedLeagueOptions.map((league) => (
+          <option key={league?.id} value={league?.id}>
+            {league?.name}
           </option>
         ))}
       </select>
