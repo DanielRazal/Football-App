@@ -10,9 +10,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Leagues />} />
-          {/* <Route path="/leagues" element={<Content />} /> */}
           <Route path="/leagues" element={<Leagues />} />
-          {/* <Route path="/standings" element={<Content />} /> */}
           <Route path="/standings" element={<Standings />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
