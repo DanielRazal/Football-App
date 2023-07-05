@@ -28,6 +28,18 @@
   }
 }
 
+@media (max-width: 480px) {
+  .table-small {
+    width: 100%;
+  }
+
+  .table-small th,
+  .table-small td {
+    padding: 0.4rem;
+    font-size: 14px;
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
