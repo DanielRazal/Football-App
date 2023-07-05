@@ -3,10 +3,10 @@ import '../App.css';
 import FootballService from '../Services/FootballService';
 import Content from './Content';
 import Selects from './Selects';
-import Table from './Table';
 import Header from './Header';
 import OvalLoader from './OvalLoader';
 import Footer from './Footer';
+import LeagueTable from './LeagueTable';
 
 const Standings = () => {
   const [data, setData] = useState([]);
@@ -21,7 +21,6 @@ const Standings = () => {
     setLoading(true);
     FootballService.getStandings(selectedLeague, selectedYear)
       .then((standings) => {
-        // console.log(standings);
         setData(standings);
       })
       .catch((error) => console.log(error))
@@ -31,7 +30,6 @@ const Standings = () => {
   useEffect(() => {
     FootballService.getLeagues()
       .then((leagues) => {
-        console.log(leagues);
         setLeagueOptions(leagues);
       })
       .catch((error) => {
@@ -40,7 +38,6 @@ const Standings = () => {
 
     FootballService.getLeagueById(selectedLeague)
       .then((league) => {
-        console.log(league);
         setLeague(league);
       })
       .catch((error) => {
@@ -58,7 +55,6 @@ const Standings = () => {
           <Header />
           <Content />
           <div className="flex flex-col items-center">
-            <div className="max-w-lg w-full">
               <div className="relative">
                 <div className="p-3 text-white bg-purple-700 flex items-center">
                   {league && league.logos && (
@@ -68,8 +64,7 @@ const Standings = () => {
                     {league ? league.name : "Loading..."} Table
                   </h1>
                 </div>
-                <div className="bg-gray-100 p-2 text-center">
-                  <div className="bg-gray-100 p-2 text-center">
+                  <div className="bg-gray-300 p-2 text-center">
                     <Selects
                       selectedYear={selectedYear}
                       selectedLeague={selectedLeague}
@@ -78,14 +73,11 @@ const Standings = () => {
                       leagueOptions={leagueOptions}
                     />
                   </div>
-                </div>
-                <Table data={data} />
+                <LeagueTable data={data} />
               </div>
             </div>
-          </div>
           <Footer />
         </>
-
       )}
     </div>
 

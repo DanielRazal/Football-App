@@ -10,6 +10,13 @@ const Leagues = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    setLoading(true);
+    FootballService.getLeagues()
+      .then((data) => { setData(data); })
+      .catch((error) => { console.log(error); })
+      .finally(() => setLoading(false));
+  }, []);
 
   const topFiveIndexes = [5, 9, 16, 7, 6, 13, 4, 18, 12];
 
@@ -21,20 +28,11 @@ const Leagues = () => {
 
   const updatedLeagueOptions = [...topFiveLeagues, ...remainingLeagues];
 
-
-  useEffect(() => {
-    setLoading(true);
-    FootballService.getLeagues()
-      .then((data) => { setData(data); })
-      .catch((error) => { console.log(error); })
-      .finally(() => setLoading(false));
-  }, []);
-
   return (
     <div>
 
       {loading ? (
-        <OvalLoader/>
+        <OvalLoader />
       ) : (
         <>
           <Header />
@@ -47,7 +45,7 @@ const Leagues = () => {
               </div>
             ))}
           </div>
-          <Footer/>
+          <Footer />
         </>
       )}
     </div>
