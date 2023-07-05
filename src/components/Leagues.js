@@ -38,8 +38,8 @@ const Leagues = () => {
           <Header />
           <Content />
           <div className="w-full grid grid-cols-4 justify-items-center text-center">
-            {updatedLeagueOptions.map((item) => (
-              <div key={item?.id} className="mt-20 mb-20 hover:scale-110 cursor-pointer">
+            {updatedLeagueOptions.map((item, index) => (
+              <div key={index} className="mt-20 mb-20 hover:scale-110 cursor-pointer">
                 <img src={item?.logos?.light} alt="#" className="w-60" />
                 <h1 className="font-bold text-lg">{item?.name}</h1>
               </div>

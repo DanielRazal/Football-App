@@ -44,8 +44,8 @@ const Selects = ({
         onChange={(e) => setSelectedLeague(e.target.value)}
         className="mt-2 bg-transparent border-none"
       >
-        {updatedLeagueOptions.map((league) => (
-          <option key={league?.id} value={league?.id}>
+        {updatedLeagueOptions.map((league,index) => (
+          <option key={index} value={league?.id}>
             {league?.name}
           </option>
         ))}
