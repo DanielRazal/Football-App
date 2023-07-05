@@ -28,9 +28,9 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 414px) {
   .table-small {
-    width: 100%;
+    width: 50%;
   }
 
   .table-small th,
