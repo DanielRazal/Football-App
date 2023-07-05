@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter as Router, Route ,Routes} from 'react-router-dom';
-import NotFoundPage from './Components/NotFoundPage';
-import Standings from './Components/Standings';
-import Leagues from './Components/Leagues';
+import NotFoundPage from './components/NotFoundPage';
+import Standings from './components/Standings';
+import Leagues from './components/Leagues';
 
 function App() {
   return (
