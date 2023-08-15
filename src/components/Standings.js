@@ -12,7 +12,7 @@ const Standings = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedLeague, setSelectedLeague] = useState("eng.1");
-  const [selectedYear, setSelectedYear] = useState("2022");
+  const [selectedYear, setSelectedYear] = useState("2023");
   const [leagueOptions, setLeagueOptions] = useState([]);
   const [league, setLeague] = useState([]);
 
@@ -80,7 +80,6 @@ const Standings = () => {
         </>
       )}
     </div>
-
   );
 };
 

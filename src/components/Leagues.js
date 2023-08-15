@@ -17,7 +17,7 @@ const Leagues = () => {
       .catch((error) => { console.log(error); })
       .finally(() => setLoading(false));
   }, []);
-
+  
   const topFiveIndexes = [5, 9, 16, 7, 6, 13, 4, 18, 12];
 
   const topFiveLeagues = topFiveIndexes.map((index) => data[index]);
