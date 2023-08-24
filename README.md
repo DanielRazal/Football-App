@@ -12,7 +12,7 @@ The Standings page presents tables of team standings for a specific league and s
 
 ## Deployment
 
-The Football-App project has been deployed to the Internet. You can access it using the following URL: [https://football-app-beryl.vercel.app/](https://football-app-a0be1.web.app/)
+The Football-App project has been deployed to the Internet. You can access it using the following URL: [Football-App](https://football-app-a0be1.web.app/)
 
 ## Running the Project
 
