@@ -1,6 +1,6 @@
 # Football-App Project
 
-Developed using **React**/
+Developed using **React**\
 The Football-App project is a web application that provides information about soccer teams and leagues. It consists of two main pages: "Leagues" and "Standings".
 
 ## Leagues Page
