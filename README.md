@@ -1,11 +1,11 @@
-# Football-App Project
+# Football-App
 
 Developed using **React**.\
 The Football-App project is a web application that provides information about soccer teams and leagues. It consists of two main pages: "Leagues" and "Standings".
 
 ## Leagues Page
 
-The Leagues page displays information about various soccer leagues.
+The Leagues page displays all information about various soccer leagues.
 
 ## Standings Page
 
@@ -13,15 +13,11 @@ The Standings page presents tables of team standings for a specific league and s
 
 ## Deployment
 
-The Football-App project has been deployed to the Internet. You can access it using the following URL: [Football-App](https://football-app-a0be1.web.app/).
+The **Football-App** has been deployed to the Internet. You can access it using the following URL: [Football-App](https://football-app-a0be1.web.app/).
 
 ## Running the Project
 
-### `npm start`
+### Client (React):
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
+1. Install client dependencies: **npm i**
+2. Start the React app: **npm start**
