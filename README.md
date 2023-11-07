@@ -16,8 +16,9 @@ The Standings page presents tables of team standings for a specific league and s
 The **Football-App** has been deployed to the Internet. You can access it using the following URL: [Football-App](https://football-app-a0be1.web.app/).
 
 ## Running the Project
+To run the **"Football-App"** project, execute the following commands:
 
 ### Client (React):
 
-1. Install client dependencies: **npm i**
-2. Start the React app: **npm start**
+1. Install client dependencies: **npm i**.
+2. Start the React app: **npm start**.
