@@ -5,7 +5,7 @@ The Football-App project is a web application that provides information about so
 
 ## Leagues Page
 
-The Leagues page displays information about various soccer leagues. The data is fetched from an external API and rendered on the page. Each league is represented by an image and its corresponding name. The page also includes a loading indicator to provide feedback while the data is being fetched.
+The Leagues page displays information about various soccer leagues.
 
 ## Standings Page
 
